@@ -1,8 +1,8 @@
 import { createEffect, createSignal } from "solid-js";
 import { notes } from "../store";
-import { StatusItem } from "./StatusItem";
+import { PageStatsItem } from "./PageStatsItem";
 
-export function Status() {
+export function PageStats() {
 	// words and lines counters
 
 	let [words, setWords] = createSignal(
@@ -29,10 +29,9 @@ export function Status() {
 	});
 
 	return (
-		<footer class="flex flex-row items-center justify-end gap-2">
-			<StatusItem title="words" value={words()} />
-			<StatusItem title="lines" value={lines()} />
-			<StatusItem title="Tebini" />
+		<footer class="flex flex-row items-center gap-2 py-4">
+			<PageStatsItem title="words" value={words()} />
+			<PageStatsItem title="lines" value={lines()} />
 		</footer>
 	);
 }

@@ -1,6 +1,7 @@
 import { produce } from "solid-js/store";
 import { notes, setNotes } from "../store";
 import { PageInput } from "./PageInput";
+import { PageStats } from "./PageStats";
 
 export function Page() {
 	return (
@@ -17,6 +18,7 @@ export function Page() {
 					)
 				}
 			></PageInput>
+			<PageStats />
 			<PageInput
 				content={notes.books[notes.current[0]].pages[notes.current[1]].content}
 				handleInput={(e) =>

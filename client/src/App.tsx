@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 import { Explorer } from "./components/Explorer";
 import { Page } from "./components/Page";
-import { Status } from "./components/Status";
+import { PageStats } from "./components/PageStats";
 
 const App: Component = () => {
 	return (
@@ -12,7 +12,7 @@ const App: Component = () => {
 					<Explorer></Explorer>
 				</main>
 
-				<Status></Status>
+				<PageStats></PageStats>
 			</div>
 		</div>
 	);
