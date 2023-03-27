@@ -30,7 +30,7 @@ export function ExplorerItem(props: {
 		setNotes(
 			produce((notes) =>
 				notes.books[props.bookIndex || 0].pages.push({
-					title: "New note",
+					title: "",
 					content: "",
 				})
 			)

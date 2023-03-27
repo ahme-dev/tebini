@@ -49,8 +49,8 @@ export function Explorer() {
 				<div class="mb-2 flex flex-row items-center justify-between gap-2 py-1 px-4 text-sm focus-within:bg-zinc-600/40">
 					<input
 						type="text"
-						class="w-full bg-transparent  focus:outline-none"
-						placeholder="name for new book"
+						class="w-auto max-w-[7.5rem] bg-transparent  focus:outline-none"
+						placeholder="new book title"
 						value={nameInput().title}
 						onkeyup={(e) => {
 							if (e.key == "Enter") addBook();
