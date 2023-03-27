@@ -1,4 +1,4 @@
-import { FiPenTool, FiPlusCircle } from "solid-icons/fi";
+import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
 import { notes, setNotes } from "../store";
@@ -22,21 +22,29 @@ export function Explorer() {
 		setNameInput((_) => ({ isVisible: false, title: "" }));
 	}
 
+	function handleTopButton() {
+		if (nameInput().isVisible)
+			setNameInput((_) => ({ title: "", isVisible: false }));
+		else setNameInput((prev) => ({ ...prev, isVisible: true }));
+	}
+
 	return (
-		<div
-			class="group flex h-fit flex-col bg-zinc-700/40"
-			onFocusOut={() => setNameInput((prev) => ({ ...prev, isVisible: false }))}
-		>
+		<div class="group flex h-fit flex-col bg-zinc-700/40">
+			{/* title of explorer */}
 			<div class="flex flex-row items-center justify-between px-4 py-2">
 				<p>Files</p>
 				<div
 					class="opacity-0 transition-all hover:cursor-pointer group-hover:opacity-100"
-					onclick={() => setNameInput((prev) => ({ ...prev, isVisible: true }))}
+					onclick={handleTopButton}
 				>
-					<FiPlusCircle />
+					<Show when={nameInput().isVisible} fallback={<FiPlus />}>
+						<FiChevronUp />
+					</Show>
 				</div>
 			</div>
+			{/* title of explorer end */}
 
+			{/* book adding bar */}
 			<Show when={nameInput().isVisible}>
 				<div class="mb-2 flex flex-row items-center justify-between gap-2 py-1 px-4 text-sm focus-within:bg-zinc-600/40">
 					<input
@@ -54,11 +62,12 @@ export function Explorer() {
 							}));
 						}}
 					/>
-					<div class="cursor-pointer" onclick={addBook}>
+					<div class="cursor-pointer" onclick={() => addBook()}>
 						<FiPenTool />
 					</div>
 				</div>
 			</Show>
+			{/* book adding bar end */}
 
 			{/* list of books */}
 			<div class="max-h-[60vh] overflow-scroll">
