@@ -25,5 +25,9 @@ export const [notes, setNotes] = createStore<{
 				},
 			],
 		},
+		{
+			title: "Dev",
+			pages: [],
+		},
 	],
 });

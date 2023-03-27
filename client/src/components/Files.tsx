@@ -15,10 +15,12 @@ export function Files() {
 			{notes.books.map((book, bookIndex) => {
 				return (
 					<>
-						<FilesItem isDir title={book.title} />
+						<FilesItem bookIndex={bookIndex} isBook title={book.title} />
 						{book.pages.map((page, pageIndex) => {
 							return (
 								<FilesItem
+									bookIndex={bookIndex}
+									pageIndex={pageIndex}
 									handleClick={() =>
 										setNotes(
 											produce(
