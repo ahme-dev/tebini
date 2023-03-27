@@ -1,9 +1,15 @@
-export function NoteInput(props: { isMultiline?: boolean }) {
+export function NoteInput(props: {
+	isMultiline?: boolean;
+	content: string;
+	handleInput: (e: any) => void;
+}) {
 	if (props.isMultiline) {
 		return (
 			<textarea
 				class="grow bg-transparent focus:outline-none"
 				placeholder="Content"
+				value={props.content}
+				oninput={props.handleInput}
 			/>
 		);
 	}
@@ -13,6 +19,8 @@ export function NoteInput(props: { isMultiline?: boolean }) {
 			type="text"
 			class="bg-transparent text-xl font-bold focus:outline-none"
 			placeholder="Title"
+			value={props.content}
+			oninput={props.handleInput}
 		/>
 	);
 }
