@@ -1,7 +1,6 @@
 import type { Component } from "solid-js";
 import { Explorer } from "./components/Explorer";
 import { Page } from "./components/Page";
-import { PageStats } from "./components/PageStats";
 
 const App: Component = () => {
 	return (
@@ -12,7 +11,15 @@ const App: Component = () => {
 					<Explorer></Explorer>
 				</main>
 
-				<PageStats></PageStats>
+				<footer class="flex flex-row items-center justify-end gap-2 text-sm font-bold">
+					<a
+						href="https://github.com/ahmeddots/tebini"
+						target="_blank"
+						class="cursor-pointer bg-zinc-700/40 py-1 px-2 hover:bg-zinc-600/40"
+					>
+						Tebini
+					</a>
+				</footer>
 			</div>
 		</div>
 	);
