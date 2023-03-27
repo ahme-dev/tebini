@@ -11,6 +11,19 @@ export function ExplorerItem(props: {
 	isSelected?: boolean;
 	handleClick?: () => void;
 }) {
+	// functions to abstract values
+
+	function getTitle() {
+		// if longer than 10 characters return cut
+		if (props.title.length > 10) return props.title.slice(0, 10) + "...";
+
+		// if there is no title return Untitled
+		if (props.title.length === 0) return "Untitled";
+
+		// otherwise return title
+		return props.title;
+	}
+
 	// functions to run on click
 
 	function addPage(): any {
@@ -35,31 +48,26 @@ export function ExplorerItem(props: {
 		);
 	}
 
+	// render
+
 	return (
 		<div
 			onclick={props.handleClick}
-			class={`group/dir flex h-fit flex-col gap-2 px-4 py-1 hover:bg-zinc-600/40
-				${
-					props.isSelected
-						? "border border-zinc-500 bg-zinc-600/40"
-						: "border border-transparent"
-				}
+			class={`group/dir flex h-fit flex-col gap-2 border border-transparent px-4 py-1 hover:bg-zinc-600/40
+				${props.isSelected && "border-zinc-500 bg-zinc-600/40"}
 				${!props.isBook && "pl-8 hover:cursor-pointer"}
 			`}
 		>
 			<div class="flex items-center justify-between gap-2 text-sm font-bold">
-				{/* icon and title of item */}
+				{/* item icon & title */}
 				<div class="flex items-center gap-2">
 					<Show when={props.isBook} fallback={<FiFile />}>
 						<FiFolder />
 					</Show>
-					<p>
-						{props.title.length > 10
-							? props.title.slice(0, 10) + "..."
-							: props.title}
-					</p>
+					<p>{getTitle()}</p>
 				</div>
-				{/* icon and title of item end */}
+				{/* item icon & title end */}
+				{/* item action button */}
 				<div
 					class="opacity-0 transition-all hover:cursor-pointer group-hover/dir:opacity-100"
 					onclick={props.isBook ? addPage : deletePage}
@@ -68,6 +76,7 @@ export function ExplorerItem(props: {
 						<FiFilePlus />
 					</Show>
 				</div>
+				{/* item action button end */}
 			</div>
 		</div>
 	);
