@@ -69,7 +69,7 @@ export function ExplorerItem(props: {
 				{/* item icon & title end */}
 				{/* item action button */}
 				<div
-					class="opacity-0 transition-all hover:cursor-pointer group-hover/dir:opacity-100"
+					class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover/dir:opacity-100"
 					onclick={props.isBook ? addPage : deletePage}
 				>
 					<Show when={props.isBook} fallback={<FiTrash2 />}>

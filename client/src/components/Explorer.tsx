@@ -34,7 +34,7 @@ export function Explorer() {
 			<div class="flex flex-row items-center justify-between px-4 py-2">
 				<p>Explorer</p>
 				<div
-					class="opacity-0 transition-all hover:cursor-pointer group-hover:opacity-100"
+					class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover:opacity-100"
 					onclick={handleTopButton}
 				>
 					<Show when={nameInput().isVisible} fallback={<FiPlus />}>
@@ -70,7 +70,7 @@ export function Explorer() {
 			{/* book adding bar end */}
 
 			{/* list of books */}
-			<div class="max-h-[60vh] overflow-scroll">
+			<div class="flex max-h-[15vh] flex-col overflow-scroll md:max-h-[60vh]">
 				<For each={notes.books}>
 					{(book, bookIndex) => (
 						<>

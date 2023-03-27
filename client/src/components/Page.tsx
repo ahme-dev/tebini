@@ -5,7 +5,7 @@ import { PageStats } from "./PageStats";
 
 export function Page() {
 	return (
-		<div class="flex w-8 grow flex-col gap-4 p-2">
+		<div class="flex grow flex-col gap-4 p-2">
 			<PageInput
 				content={notes.books[notes.current[0]].pages[notes.current[1]].title}
 				handleInput={(e) =>
