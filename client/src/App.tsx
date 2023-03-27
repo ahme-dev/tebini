@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { Files } from "./components/Files";
+import { Explorer } from "./components/Explorer";
 import { Note } from "./components/Note";
 import { Status } from "./components/Status";
 
@@ -9,7 +9,7 @@ const App: Component = () => {
 			<div class="flex grow flex-col">
 				<main class="flex grow flex-row gap-4">
 					<Note></Note>
-					<Files></Files>
+					<Explorer></Explorer>
 				</main>
 
 				<Status></Status>

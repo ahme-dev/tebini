@@ -2,9 +2,9 @@ import { FiPlusCircle } from "solid-icons/fi";
 import { For } from "solid-js";
 import { produce } from "solid-js/store";
 import { notes, setNotes } from "../store";
-import { FilesItem } from "./FilesItem";
+import { ExplorerItem } from "./ExplorerItem";
 
-export function Files() {
+export function Explorer() {
 	return (
 		<div class="group flex h-fit flex-col bg-zinc-700/40">
 			<div class="flex flex-row items-center justify-between px-4 py-2">
@@ -18,12 +18,12 @@ export function Files() {
 				{(book, bookIndex) => (
 					<>
 						{/* a book */}
-						<FilesItem bookIndex={bookIndex()} isBook title={book.title} />
+						<ExplorerItem bookIndex={bookIndex()} isBook title={book.title} />
 
 						{/* a book's pages */}
 						<For each={book.pages}>
 							{(page, pageIndex) => (
-								<FilesItem
+								<ExplorerItem
 									bookIndex={bookIndex()}
 									pageIndex={pageIndex()}
 									handleClick={() =>
