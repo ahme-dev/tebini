@@ -16,6 +16,7 @@ export function NoteInput(props: {
 
 	return (
 		<input
+			maxlength={35}
 			type="text"
 			class="bg-transparent text-xl font-bold focus:outline-none"
 			placeholder="Title"
