@@ -32,7 +32,7 @@ export function Explorer() {
 		<div class="group flex h-fit flex-col bg-zinc-700/40">
 			{/* title of explorer */}
 			<div class="flex flex-row items-center justify-between px-4 py-2">
-				<p>Files</p>
+				<p>Explorer</p>
 				<div
 					class="opacity-0 transition-all hover:cursor-pointer group-hover:opacity-100"
 					onclick={handleTopButton}
