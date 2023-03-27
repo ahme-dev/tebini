@@ -1,4 +1,4 @@
-export function NoteInput(props: {
+export function PageInput(props: {
 	isMultiline?: boolean;
 	content: string;
 	handleInput: (e: any) => void;
@@ -6,7 +6,7 @@ export function NoteInput(props: {
 	if (props.isMultiline) {
 		return (
 			<textarea
-				class="grow bg-transparent focus:outline-none"
+				class="grow resize-none bg-transparent focus:outline-none"
 				placeholder="Content"
 				value={props.content}
 				oninput={props.handleInput}

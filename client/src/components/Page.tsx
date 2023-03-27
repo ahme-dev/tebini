@@ -1,11 +1,11 @@
 import { produce } from "solid-js/store";
 import { notes, setNotes } from "../store";
-import { NoteInput } from "./NoteInput";
+import { PageInput } from "./PageInput";
 
-export function Note() {
+export function Page() {
 	return (
 		<div class="flex w-8 grow flex-col gap-4 p-2">
-			<NoteInput
+			<PageInput
 				content={notes.books[notes.current[0]].pages[notes.current[1]].title}
 				handleInput={(e) =>
 					setNotes(
@@ -16,8 +16,8 @@ export function Note() {
 						)
 					)
 				}
-			></NoteInput>
-			<NoteInput
+			></PageInput>
+			<PageInput
 				content={notes.books[notes.current[0]].pages[notes.current[1]].content}
 				handleInput={(e) =>
 					setNotes(
@@ -29,7 +29,7 @@ export function Note() {
 					)
 				}
 				isMultiline
-			></NoteInput>
+			></PageInput>
 		</div>
 	);
 }
