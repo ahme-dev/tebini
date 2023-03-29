@@ -1,7 +1,6 @@
 import { FiFile, FiFilePlus, FiFolder, FiTrash2 } from "solid-icons/fi";
 import { Show } from "solid-js";
-import { produce } from "solid-js/store";
-import { setNotes } from "../store";
+import { addPage, deletePage } from "../store";
 
 export function ExplorerItem(props: {
 	title: string;
@@ -11,8 +10,6 @@ export function ExplorerItem(props: {
 	isSelected?: boolean;
 	handleClick?: () => void;
 }) {
-	// functions to abstract values
-
 	function getTitle() {
 		// if longer than 10 characters return cut
 		if (props.title.length > 10) return props.title.slice(0, 10) + "...";
@@ -24,28 +21,9 @@ export function ExplorerItem(props: {
 		return props.title;
 	}
 
-	// functions to run on click
-
-	function addPage(): any {
-		setNotes(
-			produce((notes) =>
-				notes.books[props.bookIndex || 0].pages.push({
-					title: "",
-					content: "",
-				})
-			)
-		);
-	}
-
-	function deletePage(): any {
-		setNotes(
-			produce(
-				(notes) =>
-					(notes.books[props.bookIndex || 0].pages = notes.books[
-						props.bookIndex || 0
-					].pages.filter((_, i: number) => i !== props.pageIndex))
-			)
-		);
+	function handleAction() {
+		if (props.isBook) addPage(props.bookIndex || 0);
+		else deletePage(props.bookIndex || 0, props.pageIndex || 0);
 	}
 
 	// render
@@ -70,7 +48,7 @@ export function ExplorerItem(props: {
 				{/* item action button */}
 				<div
 					class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover/dir:opacity-100"
-					onclick={props.isBook ? addPage : deletePage}
+					onclick={handleAction}
 				>
 					<Show when={props.isBook} fallback={<FiTrash2 />}>
 						<FiFilePlus />

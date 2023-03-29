@@ -1,4 +1,4 @@
-import { createStore } from "solid-js/store";
+import { createStore, produce } from "solid-js/store";
 
 interface NoteBook {
 	title: string;
@@ -31,3 +31,36 @@ export const [notes, setNotes] = createStore<{
 		},
 	],
 });
+
+export const addPage = (bookIndex: number) => {
+	setNotes(
+		produce((notes) =>
+			notes.books[bookIndex].pages.push({
+				title: "",
+				content: "",
+			})
+		)
+	);
+};
+
+export const deletePage = (bookIndex: number, pageIndex: number) => {
+	setNotes(
+		produce(
+			(notes) =>
+				(notes.books[bookIndex].pages = notes.books[bookIndex].pages.filter(
+					(_, i: number) => i !== pageIndex
+				))
+		)
+	);
+};
+
+export const addBook = (title: string) => {
+	setNotes(
+		produce((notes) =>
+			notes.books.push({
+				title,
+				pages: [],
+			})
+		)
+	);
+};

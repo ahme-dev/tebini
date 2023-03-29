@@ -1,7 +1,7 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
-import { notes, setNotes } from "../store";
+import { addBook, notes, setNotes } from "../store";
 import { ExplorerItem } from "./ExplorerItem";
 
 export function Explorer() {
@@ -10,15 +10,8 @@ export function Explorer() {
 		title: "",
 	});
 
-	function addBook() {
-		setNotes(
-			produce((notes) =>
-				notes.books.push({
-					title: nameInput().title,
-					pages: [],
-				})
-			)
-		);
+	function handleAdd() {
+		addBook(nameInput().title);
 		setNameInput((_) => ({ isVisible: false, title: "" }));
 	}
 
@@ -29,7 +22,12 @@ export function Explorer() {
 	}
 
 	return (
-		<div class="group flex h-fit flex-col bg-zinc-700/40">
+		<div
+			oncontextmenu={(e) => {
+				e.preventDefault();
+			}}
+			class="group flex h-fit flex-col bg-zinc-700/40"
+		>
 			{/* title of explorer */}
 			<div class="flex flex-row items-center justify-between px-4 py-2">
 				<p>Explorer</p>
@@ -46,14 +44,14 @@ export function Explorer() {
 
 			{/* book adding bar */}
 			<Show when={nameInput().isVisible}>
-				<div class="mb-2 flex flex-row items-center justify-between gap-2 py-1 px-4 text-sm focus-within:bg-zinc-600/40">
+				<div class="fo;cus-within:bg-zinc-600/40 mb-2 flex flex-row items-center justify-between gap-2 px-4 py-1 text-sm">
 					<input
 						type="text"
 						class="w-auto max-w-[7.5rem] bg-transparent  focus:outline-none"
 						placeholder="new book title"
 						value={nameInput().title}
 						onkeyup={(e) => {
-							if (e.key == "Enter") addBook();
+							if (e.key == "Enter") handleAdd();
 						}}
 						oninput={(e: any) => {
 							setNameInput((prev) => ({
@@ -62,7 +60,7 @@ export function Explorer() {
 							}));
 						}}
 					/>
-					<div class="cursor-pointer" onclick={() => addBook()}>
+					<div class="cursor-pointer" onclick={() => handleAdd()}>
 						<FiPenTool />
 					</div>
 				</div>
