@@ -33,7 +33,7 @@ export function ExplorerItem(props: {
 			onclick={props.handleClick}
 			class={`group/dir flex h-fit flex-col gap-2 border border-transparent px-4 py-1 hover:bg-zinc-600/40
 				${props.isSelected && "border-zinc-500 bg-zinc-600/40"}
-				${!props.isBook && "pl-8 hover:cursor-pointer"}
+				${!props.isBook && "ps-8 hover:cursor-pointer"}
 			`}
 		>
 			<div class="flex items-center justify-between gap-2 text-sm font-bold">

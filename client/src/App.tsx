@@ -15,7 +15,7 @@ const App: Component = () => {
 					<a
 						href="https://github.com/ahmeddots/tebini"
 						target="_blank"
-						class="cursor-pointer bg-zinc-700/40 py-1 px-2 hover:bg-zinc-600/40"
+						class="cursor-pointer bg-zinc-700/40 px-2 py-1 hover:bg-zinc-600/40"
 					>
 						Tebini
 					</a>
