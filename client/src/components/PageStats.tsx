@@ -19,7 +19,7 @@ export function PageStats() {
 	});
 
 	return (
-		<footer class="flex flex-row items-center gap-2 py-4">
+		<footer class="flex flex-row items-center gap-2 md:py-4">
 			<PageStatsItem
 				title="createdAt"
 				value={notes.books[notes.current[0]].pages[notes.current[1]].createdAt}
