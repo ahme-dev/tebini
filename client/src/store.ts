@@ -23,6 +23,26 @@ export const [notes, setNotes] = createStore<{
 					title: "Write something",
 					content: "This is an example note, containing nothing.",
 				},
+				{
+					title: "One",
+					content: "",
+				},
+				{
+					title: "Two",
+					content: "",
+				},
+				{
+					title: "Three",
+					content: "",
+				},
+				{
+					title: "Four",
+					content: "",
+				},
+				{
+					title: "Five",
+					content: "",
+				},
 			],
 		},
 		{
@@ -53,6 +73,11 @@ export const deletePage = (bookIndex: number, pageIndex: number) => {
 				))
 		)
 	);
+
+	const nearest = findNearestPage(bookIndex, pageIndex);
+	if (nearest == null) return;
+
+	setNotes(produce((notes) => (notes.current = nearest)));
 };
 
 export const addBook = (title: string) => {
