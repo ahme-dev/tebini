@@ -1,6 +1,7 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
+import { TransitionGroup } from "solid-transition-group";
 import { addBook, notes, setNotes } from "../store";
 import { ExplorerItem } from "./ExplorerItem";
 
@@ -76,27 +77,43 @@ export function Explorer() {
 							<ExplorerItem bookIndex={bookIndex()} isBook title={book.title} />
 
 							{/* a book's pages */}
-							<For each={book.pages}>
-								{(page, pageIndex) => (
-									<ExplorerItem
-										bookIndex={bookIndex()}
-										pageIndex={pageIndex()}
-										handleClick={() =>
-											setNotes(
-												produce(
-													(notes) =>
-														(notes.current = [bookIndex(), pageIndex()])
+							<TransitionGroup
+								name="slide"
+								onEnter={(el, done) => {
+									const a = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+										duration: 400,
+									});
+									a.finished.then(done);
+								}}
+								onExit={(el, done) => {
+									const a = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+										duration: 200,
+									});
+									a.finished.then(done);
+								}}
+							>
+								<For each={book.pages}>
+									{(page, pageIndex) => (
+										<ExplorerItem
+											bookIndex={bookIndex()}
+											pageIndex={pageIndex()}
+											handleClick={() =>
+												setNotes(
+													produce(
+														(notes) =>
+															(notes.current = [bookIndex(), pageIndex()])
+													)
 												)
-											)
-										}
-										title={page.title}
-										isSelected={
-											bookIndex() == notes.current[0] &&
-											pageIndex() == notes.current[1]
-										}
-									/>
-								)}
-							</For>
+											}
+											title={page.title}
+											isSelected={
+												bookIndex() == notes.current[0] &&
+												pageIndex() == notes.current[1]
+											}
+										/>
+									)}
+								</For>
+							</TransitionGroup>
 							{/* a book's pages end */}
 						</>
 					)}

@@ -454,6 +454,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@solid-primitives/refs@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@solid-primitives/refs/-/refs-1.0.1.tgz#e3f5fc0ea332e1e19951382e91e736127dff26dc"
+  integrity sha512-1DYJCbAYVr1qGtKhexxYt0IA4VKgQFmgO6pSqW98p6XwNO2kqJwKb6wVMBSCggLdresE0mqBSTyYPPIE1sxMJQ==
+  dependencies:
+    "@solid-primitives/utils" "^5.5.1"
+
+"@solid-primitives/transition-group@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@solid-primitives/transition-group/-/transition-group-1.0.1.tgz#c133b7a9ea9f5cf595d21cbeb7a384b76751ea22"
+  integrity sha512-StVQs7BVGQa1uo6dD19wqOgfGMxu3gL/bvPHUV/NBJaiNX5R5e7dPb6lz6zR1RdTho3M+3Mv8jUHKd/aKuhL4w==
+
+"@solid-primitives/utils@^5.5.1":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@solid-primitives/utils/-/utils-5.5.2.tgz#873276d5bfedf7709d6268b1bee4f1a0897e85fa"
+  integrity sha512-L52ig3eHKU6CqbPCKJIb4lweBuINHBOERcE1duApyKozEN8+zCqEKwD1Qo9ljKeEzJTBGWClxNpwEiNTUWTGvg==
+
 "@types/babel__core@^7.1.20":
   version "7.20.0"
   resolved "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.0.tgz"
@@ -1150,6 +1167,14 @@ solid-refresh@^0.5.0:
     "@babel/generator" "^7.21.1"
     "@babel/helper-module-imports" "^7.18.6"
     "@babel/types" "^7.21.2"
+
+solid-transition-group@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/solid-transition-group/-/solid-transition-group-0.2.2.tgz#a38e8d4e0ae19dcb67ac24355d8d2f82b2b3ea2d"
+  integrity sha512-6nB90UM2PB6VsIo/UCkmZmlIJb9mnmP7QPGrePqQJWtpUiRs5PbhkB8fvdyv9g/RPHWYpdJhQgxL6n++WmTt5A==
+  dependencies:
+    "@solid-primitives/refs" "^1.0.1"
+    "@solid-primitives/transition-group" "^1.0.1"
 
 source-map-js@^1.0.2:
   version "1.0.2"

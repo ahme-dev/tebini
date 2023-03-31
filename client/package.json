@@ -22,6 +22,7 @@
 	},
 	"dependencies": {
 		"solid-icons": "^1.0.4",
-		"solid-js": "^1.6.10"
+		"solid-js": "^1.6.10",
+		"solid-transition-group": "^0.2.2"
 	}
 }
