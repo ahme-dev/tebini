@@ -45,7 +45,7 @@ export function Explorer() {
 
 			{/* book adding bar */}
 			<Show when={nameInput().isVisible}>
-				<div class="fo;cus-within:bg-zinc-600/40 mb-2 flex flex-row items-center justify-between gap-2 px-4 py-1 text-sm">
+				<div class="mb-2 flex flex-row items-center justify-between gap-2 px-4 py-1 text-sm focus-within:bg-zinc-600/40">
 					<input
 						type="text"
 						class="w-auto max-w-[7.5rem] bg-transparent  focus:outline-none"
