@@ -1,7 +1,7 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
-import { TransitionGroup } from "solid-transition-group";
+import { Transition, TransitionGroup } from "solid-transition-group";
 import { addBook, notes, setNotes } from "../store";
 import { ExplorerItem } from "./ExplorerItem";
 
@@ -44,28 +44,44 @@ export function Explorer() {
 			{/* title of explorer end */}
 
 			{/* book adding bar */}
-			<Show when={nameInput().isVisible}>
-				<div class="mb-2 flex flex-row items-center justify-between gap-2 px-4 py-1 text-sm focus-within:bg-zinc-600/40">
-					<input
-						type="text"
-						class="w-auto max-w-[7.5rem] bg-transparent  focus:outline-none"
-						placeholder="new book title"
-						value={nameInput().title}
-						onkeyup={(e) => {
-							if (e.key == "Enter") handleAdd();
-						}}
-						oninput={(e: any) => {
-							setNameInput((prev) => ({
-								isVisible: prev.isVisible,
-								title: e.target.value,
-							}));
-						}}
-					/>
-					<div class="cursor-pointer" onclick={() => handleAdd()}>
-						<FiPenTool />
+			<Transition
+				name="slide"
+				onEnter={(el, done) => {
+					const a = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+						duration: 300,
+					});
+					a.finished.then(done);
+				}}
+				onExit={(el, done) => {
+					const a = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+						duration: 200,
+					});
+					a.finished.then(done);
+				}}
+			>
+				<Show when={nameInput().isVisible}>
+					<div class="mb-2 flex flex-row items-center justify-between gap-2 px-4 py-1 text-sm focus-within:bg-zinc-600/40">
+						<input
+							type="text"
+							class="w-auto max-w-[7.5rem] bg-transparent  focus:outline-none"
+							placeholder="new book title"
+							value={nameInput().title}
+							onkeyup={(e) => {
+								if (e.key == "Enter") handleAdd();
+							}}
+							oninput={(e: any) => {
+								setNameInput((prev) => ({
+									isVisible: prev.isVisible,
+									title: e.target.value,
+								}));
+							}}
+						/>
+						<div class="cursor-pointer" onclick={() => handleAdd()}>
+							<FiPenTool />
+						</div>
 					</div>
-				</div>
-			</Show>
+				</Show>
+			</Transition>
 			{/* book adding bar end */}
 
 			{/* list of books */}
