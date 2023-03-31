@@ -6,6 +6,7 @@ interface NoteBook {
 }
 
 interface NotePage {
+	createdAt: string;
 	title: string;
 	content: string;
 }
@@ -22,26 +23,32 @@ export const [notes, setNotes] = createStore<{
 				{
 					title: "Write something",
 					content: "This is an example note, containing nothing.",
+					createdAt: "2023",
 				},
 				{
 					title: "One",
 					content: "",
+					createdAt: "2023",
 				},
 				{
 					title: "Two",
 					content: "",
+					createdAt: "2023",
 				},
 				{
 					title: "Three",
 					content: "",
+					createdAt: "2023",
 				},
 				{
 					title: "Four",
 					content: "",
+					createdAt: "2023",
 				},
 				{
 					title: "Five",
 					content: "",
+					createdAt: "2023",
 				},
 			],
 		},
@@ -58,6 +65,7 @@ export const addPage = (bookIndex: number) => {
 			notes.books[bookIndex].pages.push({
 				title: "",
 				content: "",
+				createdAt: new Date().toUTCString(),
 			})
 		)
 	);
