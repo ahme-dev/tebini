@@ -1,6 +1,5 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
-import { produce } from "solid-js/store";
 import { Transition, TransitionGroup } from "solid-transition-group";
 import { addBook, notes, setNotes } from "../store";
 import { ExplorerItem } from "./ExplorerItem";
@@ -115,10 +114,8 @@ export function Explorer() {
 											pageIndex={pageIndex()}
 											handleClick={() =>
 												setNotes(
-													produce(
-														(notes) =>
-															(notes.current = [bookIndex(), pageIndex()])
-													)
+													"current",
+													(notes.current = [bookIndex(), pageIndex()])
 												)
 											}
 											title={page.title}
