@@ -113,10 +113,7 @@ export function Explorer() {
 											bookIndex={bookIndex()}
 											pageIndex={pageIndex()}
 											handleClick={() =>
-												setNotes(
-													"current",
-													(notes.current = [bookIndex(), pageIndex()])
-												)
+												setNotes("current", [bookIndex(), pageIndex()])
 											}
 											title={page.title}
 											isSelected={
