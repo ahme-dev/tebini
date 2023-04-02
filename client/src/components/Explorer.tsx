@@ -90,7 +90,7 @@ export function Explorer() {
 					{(book, bookIndex) => (
 						<>
 							{/* a book */}
-							<ExplorerItem bookIndex={bookIndex()} isBook title={book.title} />
+							<ExplorerItem bookIndex={bookIndex()} title={book.title} />
 
 							{/* a book's pages */}
 							<TransitionGroup

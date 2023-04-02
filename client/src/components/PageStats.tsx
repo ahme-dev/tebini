@@ -1,11 +1,10 @@
 import { createEffect, createSignal } from "solid-js";
-import { notes } from "../store";
+import { getCurrent, notes } from "../store";
 import { PageStatsItem } from "./PageStatsItem";
 
 // splitting text and getting count
 const splitCurrent = (splitAt: string) =>
-	notes.books[notes.current[0]].pages[notes.current[1]].content.split(splitAt)
-		.length;
+	getCurrent().content.split(splitAt).length;
 
 export function PageStats() {
 	// words and lines counters

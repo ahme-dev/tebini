@@ -1,4 +1,4 @@
-import { createStore, produce } from "solid-js/store";
+import { createStore } from "solid-js/store";
 
 interface NoteBook {
 	title: string;
@@ -59,44 +59,52 @@ export const [notes, setNotes] = createStore<{
 	],
 });
 
+export const getCurrent = (): NotePage => {
+	return notes.books[notes.current[0]].pages[notes.current[1]];
+};
+
+export const changeCurrent = (page: { title?: string; content?: string }) => {
+	notes.books[notes.current[0]].pages[notes.current[1]] = {
+		title: page.title || getCurrent().title,
+		content: page.content || getCurrent().content,
+		createdAt: getCurrent().createdAt,
+	};
+};
+
 export const addPage = (bookIndex: number) => {
-	setNotes(
-		produce((notes) =>
-			notes.books[bookIndex].pages.push({
-				title: "",
-				content: "",
-				createdAt: new Date().toUTCString(),
-			})
-		)
-	);
+	setNotes("books", bookIndex, "pages", [
+		...notes.books[bookIndex].pages,
+		{
+			title: "",
+			content: "",
+			createdAt: new Date().toUTCString(),
+		},
+	]);
 };
 
 export const deletePage = (bookIndex: number, pageIndex: number) => {
 	// delete the page
 	setNotes(
-		produce(
-			(notes) =>
-				(notes.books[bookIndex].pages = notes.books[bookIndex].pages.filter(
-					(_, i: number) => i !== pageIndex
-				))
-		)
+		"books",
+		bookIndex,
+		"pages",
+		notes.books[bookIndex].pages.filter((_, i: number) => i !== pageIndex)
 	);
 
 	const nearest = findNearestPage(bookIndex, pageIndex);
 	if (nearest == null) return;
 
-	setNotes(produce((notes) => (notes.current = nearest)));
+	setNotes("current", nearest);
 };
 
 export const addBook = (title: string) => {
-	setNotes(
-		produce((notes) =>
-			notes.books.push({
-				title,
-				pages: [],
-			})
-		)
-	);
+	setNotes("books", [
+		...notes.books,
+		{
+			title,
+			pages: [],
+		},
+	]);
 };
 
 const findNearestPage = (
