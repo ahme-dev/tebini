@@ -1,7 +1,7 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { Transition, TransitionGroup } from "solid-transition-group";
-import { addBook, notes, setNotes } from "../store";
+import { addBook, notes } from "../store";
 import { ExplorerItem } from "./ExplorerItem";
 
 export function Explorer() {
@@ -89,7 +89,7 @@ export function Explorer() {
 					{(book, bookIndex) => (
 						<>
 							{/* a book */}
-							<ExplorerItem bookIndex={bookIndex()} title={book.title} />
+							<ExplorerItem isBook bookIndex={bookIndex()} title={book.title} />
 
 							{/* a book's pages */}
 							<TransitionGroup
@@ -112,9 +112,6 @@ export function Explorer() {
 										<ExplorerItem
 											bookIndex={bookIndex()}
 											pageIndex={pageIndex()}
-											handleClick={() =>
-												setNotes("current", [bookIndex(), pageIndex()])
-											}
 											title={page.title}
 											isSelected={
 												bookIndex() == notes.current[0] &&

@@ -83,18 +83,22 @@ export const addPage = (bookIndex: number) => {
 };
 
 export const deletePage = (bookIndex: number, pageIndex: number) => {
-	// delete the page
+	// find nearest page to selected
+	const nearest = findNearestPage(bookIndex, pageIndex);
+
+	// if nothing found don't return and don't delete the selected page
+	if (nearest == null) return;
+
+	// set current to nearest page
+	setNotes("current", nearest);
+
+	// delete the selected page
 	setNotes(
 		"books",
 		bookIndex,
 		"pages",
 		notes.books[bookIndex].pages.filter((_, i: number) => i !== pageIndex)
 	);
-
-	const nearest = findNearestPage(bookIndex, pageIndex);
-	if (nearest == null) return;
-
-	setNotes("current", nearest);
 };
 
 export const addBook = (title: string) => {
