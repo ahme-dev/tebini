@@ -1,5 +1,5 @@
 import { createEffect, createSignal } from "solid-js";
-import { getCurrent, notes } from "../store";
+import { getCurrent, notes } from "../stores/notes";
 import { PageStatsItem } from "./PageStatsItem";
 
 // splitting text and getting count

@@ -1,4 +1,4 @@
-import { changeCurrent, notes } from "../store";
+import { changeCurrent, notes } from "../stores/notes";
 import { PageInput } from "./PageInput";
 import { PageStats } from "./PageStats";
 

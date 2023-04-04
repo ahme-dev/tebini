@@ -1,6 +1,6 @@
 import { FiFile, FiFilePlus, FiFolder, FiTrash2 } from "solid-icons/fi";
 import { Show } from "solid-js";
-import { addPage, deletePage, setNotes } from "../store";
+import { addPage, trashPage, setNotes } from "../stores/notes";
 
 export function ExplorerItem(props: {
 	title: string;
@@ -31,7 +31,7 @@ export function ExplorerItem(props: {
 		}
 
 		// if page delete it
-		deletePage(props.bookIndex || 0, props.pageIndex || 0);
+		trashPage(props.bookIndex || 0, props.pageIndex || 0);
 	}
 
 	function handleDivClick() {

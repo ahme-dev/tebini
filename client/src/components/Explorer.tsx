@@ -1,7 +1,7 @@
 import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { Transition, TransitionGroup } from "solid-transition-group";
-import { addBook, notes } from "../store";
+import { addBook, notes } from "../stores/notes";
 import { ExplorerItem } from "./ExplorerItem";
 
 export function Explorer() {
