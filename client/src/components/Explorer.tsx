@@ -2,6 +2,7 @@ import { FiChevronUp, FiPenTool, FiPlus } from "solid-icons/fi";
 import { createSignal, For, Show } from "solid-js";
 import { Transition, TransitionGroup } from "solid-transition-group";
 import { addBook, notes } from "../stores/notes";
+import { trash } from "../stores/trash";
 import { ExplorerItem } from "./ExplorerItem";
 
 export function Explorer() {
@@ -9,6 +10,8 @@ export function Explorer() {
 		isVisible: false,
 		title: "",
 	});
+
+	const [showTrash, setShowTrash] = createSignal(false);
 
 	function handleAdd() {
 		addBook(nameInput().title);
@@ -85,48 +88,57 @@ export function Explorer() {
 
 			{/* list of books */}
 			<div class="flex max-h-[15vh] flex-col overflow-scroll md:max-h-[60vh]">
-				<For each={notes.books}>
-					{(book, bookIndex) => (
-						<>
-							{/* a book */}
-							<ExplorerItem isBook bookIndex={bookIndex()} title={book.title} />
+				{showTrash() ? (
+					<For each={trash.pages}>{(page) => <div>{page.title}</div>}</For>
+				) : (
+					<For each={notes.books}>
+						{(book, bookIndex) => (
+							<>
+								{/* a book */}
+								<ExplorerItem
+									isBook
+									bookIndex={bookIndex()}
+									title={book.title}
+								/>
 
-							{/* a book's pages */}
-							<TransitionGroup
-								name="slide"
-								onEnter={(el, done) => {
-									const a = el.animate([{ opacity: 0 }, { opacity: 1 }], {
-										duration: 400,
-									});
-									a.finished.then(done);
-								}}
-								onExit={(el, done) => {
-									const a = el.animate([{ opacity: 1 }, { opacity: 0 }], {
-										duration: 200,
-									});
-									a.finished.then(done);
-								}}
-							>
-								<For each={book.pages}>
-									{(page, pageIndex) => (
-										<ExplorerItem
-											bookIndex={bookIndex()}
-											pageIndex={pageIndex()}
-											title={page.title}
-											isSelected={
-												bookIndex() == notes.current[0] &&
-												pageIndex() == notes.current[1]
-											}
-										/>
-									)}
-								</For>
-							</TransitionGroup>
-							{/* a book's pages end */}
-						</>
-					)}
-				</For>
+								{/* a book's pages */}
+								<TransitionGroup
+									name="slide"
+									onEnter={(el, done) => {
+										const a = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+											duration: 400,
+										});
+										a.finished.then(done);
+									}}
+									onExit={(el, done) => {
+										const a = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+											duration: 200,
+										});
+										a.finished.then(done);
+									}}
+								>
+									<For each={book.pages}>
+										{(page, pageIndex) => (
+											<ExplorerItem
+												bookIndex={bookIndex()}
+												pageIndex={pageIndex()}
+												title={page.title}
+												isSelected={
+													bookIndex() == notes.current[0] &&
+													pageIndex() == notes.current[1]
+												}
+											/>
+										)}
+									</For>
+								</TransitionGroup>
+								{/* a book's pages end */}
+							</>
+						)}
+					</For>
+				)}
 			</div>
 			{/* list of books end */}
+			<button onClick={() => setShowTrash((prev) => !prev)}>Trash</button>
 		</div>
 	);
 }

@@ -1,4 +1,5 @@
 import { createStore } from "solid-js/store";
+import { setTrash, trash } from "./trash";
 import { NoteBook, NotePage } from "./types";
 import { findNearestPage } from "./utils";
 
@@ -83,7 +84,13 @@ export const trashPage = (bookIndex: number, pageIndex: number) => {
 	// set current to nearest page
 	setNotes("current", nearest);
 
-	// delete the selected page
+	// find the page data
+	const page = notes.books[bookIndex].pages[pageIndex];
+
+	// add to trash
+	setTrash("pages", [...trash.pages, page]);
+
+	// remove the selected page from notes
 	setNotes(
 		"books",
 		bookIndex,
