@@ -11,9 +11,9 @@ export function Trash() {
 			oncontextmenu={(e) => {
 				e.preventDefault();
 			}}
-			class="group flex h-fit flex-col bg-zinc-700/40"
+			class="group flex h-fit flex-col gap-2 bg-zinc-700/40 py-2"
 		>
-			<div class="flex flex-row items-center justify-between px-4 py-2">
+			<div class="flex flex-row items-center justify-between px-4">
 				<p>Trash</p>
 				<div
 					class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover:opacity-100"
