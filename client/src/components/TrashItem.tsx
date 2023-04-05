@@ -1,5 +1,5 @@
-import { FiFile, FiXCircle } from "solid-icons/fi";
-import { permanentlyDeletePage } from "../stores/trash";
+import { FiFile, FiRefreshCw, FiXCircle } from "solid-icons/fi";
+import { permanentlyDeletePage, restorePage } from "../stores/trash";
 
 export function TrashItem(props: { title: string; index: number }) {
 	function getTitle() {
@@ -13,11 +13,18 @@ export function TrashItem(props: { title: string; index: number }) {
 		return props.title;
 	}
 
-	function handleIconClick(e: Event) {
+	function handleDeleteClick(e: Event) {
 		// don't activate onclick of the containing div
 		e.stopPropagation();
 
 		permanentlyDeletePage(props.index);
+	}
+
+	function handleRestoreClick(e: Event) {
+		// don't activate onclick of the containing div
+		e.stopPropagation();
+
+		restorePage(props.index);
 	}
 
 	// render
@@ -33,14 +40,24 @@ export function TrashItem(props: { title: string; index: number }) {
 					<p>{getTitle()}</p>
 				</div>
 				{/* item icon & title end */}
-				{/* item action button */}
-				<div
-					class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover/dir:opacity-100"
-					onclick={handleIconClick}
-				>
-					<FiXCircle />
+
+				<div class="flex flex-row gap-2">
+					{/* item action button */}
+					<div
+						class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover/dir:opacity-100"
+						onclick={handleRestoreClick}
+					>
+						<FiRefreshCw />
+					</div>
+
+					<div
+						class="transition-all hover:cursor-pointer md:opacity-0 md:group-hover/dir:opacity-100"
+						onclick={handleDeleteClick}
+					>
+						<FiXCircle />
+					</div>
+					{/* item action button end */}
 				</div>
-				{/* item action button end */}
 			</div>
 		</div>
 	);
