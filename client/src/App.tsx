@@ -1,6 +1,7 @@
 import type { Component } from "solid-js";
 import { Explorer } from "./components/Explorer";
 import { Page } from "./components/Page";
+import { Trash } from "./components/Trash";
 
 const App: Component = () => {
 	return (
@@ -8,7 +9,10 @@ const App: Component = () => {
 			<div class="flex grow flex-col gap-4">
 				<main class="flex grow flex-col-reverse gap-4 md:flex-row">
 					<Page></Page>
-					<Explorer></Explorer>
+					<div class="flex flex-col gap-4">
+						<Explorer></Explorer>
+						<Trash></Trash>
+					</div>
 				</main>
 
 				<footer class="flex flex-row items-center justify-end gap-2 text-sm font-bold">
