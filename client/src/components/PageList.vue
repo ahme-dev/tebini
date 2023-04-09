@@ -3,11 +3,11 @@ import { ref } from "vue";
 import { useNotesStore } from "../stores/notes";
 import { computed } from "@vue/reactivity";
 import type { Page } from "../stores/types";
+import PageListItem from "./PageListItem.vue";
 
 const showTrash = ref(false);
 
 const store = useNotesStore();
-const buttonStyle = "rounded-lg px-1 transition-opacity opacity-0 group-hover:opacity-100";
 
 const books = computed(() => {
 	const groups: Page[][] = [];
@@ -54,30 +54,17 @@ const books = computed(() => {
 
 				<!-- pages -->
 				<div class="flex flex-col">
-					<div
+					<PageListItem
 						v-for="page in book"
 						:key="page.id"
-						class="cursor-pointer px-2 py-1 flex flex-row justify-between items-center gap-4 border-l-2 border-transparent transition-all group"
-						:class="[page.id === store.current ? 'bg-amber-3 text-neutral-9' : '']"
-						@click="() => store.setCurrent(page.id)"
-					>
-						<div class="flex flex-row gap-1 items-center justify-center">
-							<div class="i-mdi-file"></div>
-
-							<h1>{{ page.title }}</h1>
-						</div>
-
-						<div
-							:class="buttonStyle"
-							class="i-mdi-trash-can"
-							@click="
-								(evt) => {
-									evt.stopPropagation();
-									store.trashPage(page.id);
-								}
-							"
-						></div>
-					</div>
+						:handleClick="() => store.setCurrent(page.id)"
+						:handleIconClick="(evt:Event) => {
+              evt.stopPropagation();
+              store.trashPage(page.id)}"
+						:isSelected="store.current === page.id"
+						:title="page.title"
+						icon="i-mdi-trash-can"
+					/>
 				</div>
 				<!-- pages end -->
 			</div>
@@ -92,25 +79,17 @@ const books = computed(() => {
 
 		<!-- trashed pages -->
 		<div class="flex flex-col" v-if="showTrash">
-			<div
+			<PageListItem
 				v-for="page in store.pages.filter((el) => el.inTrash)"
 				:key="page.id"
-				class="cursor-pointer px-2 py-1 flex flex-row justify-between items-center gap-4 border-l-2 border-transparent transition-all group"
-				:class="[page.id === store.current ? 'bg-amber-3 text-neutral-9' : '']"
-			>
-				<h1>{{ page.title }}</h1>
-
-				<div
-					:class="buttonStyle"
-					class="i-mdi-restore"
-					@click="
-						(evt) => {
-							evt.stopPropagation();
-							store.restorePage(page.id);
-						}
-					"
-				></div>
-			</div>
+				:handleClick="() => {}"
+				:handleIconClick="(evt:Event) => {
+          evt.stopPropagation();
+          store.restorePage(page.id);
+        }"
+				:title="page.title"
+				icon="i-mdi-restore"
+			/>
 		</div>
 		<!-- trashed pages end -->
 	</div>
