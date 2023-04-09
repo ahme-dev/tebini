@@ -1,6 +1,6 @@
-import { defineConfig, presetWind, transformerVariantGroup } from "unocss";
+import { defineConfig, presetIcons, presetWind, transformerVariantGroup } from "unocss";
 
 export default defineConfig({
-	presets: [presetWind()],
+	presets: [presetWind(), presetIcons()],
 	transformers: [transformerVariantGroup()],
 });

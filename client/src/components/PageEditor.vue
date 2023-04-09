@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useNotesStore } from "@/stores/notes";
+import PageEditorItem from "./PageEditorItem.vue";
 
 const store = useNotesStore();
 
@@ -17,24 +18,21 @@ const inputStyles =
 			placeholder="title"
 		/>
 		<div class="flex flex-row gap-2 text-sm">
-			<p class="bg-amber-3 text-neutral-9 px-1">
-				<span class="font-bold">
-					{{ store.getCurrent?.createdAt }}
-				</span>
-			</p>
-			<p class="bg-amber-3 text-neutral-9 px-1">
-				<span class="font-bold">
-					{{ store.getCurrent!.content.trim().split(" ").length }}
-				</span>
-				words
-			</p>
-			<p class="bg-amber-3 text-neutral-9 px-1">
-				<span class="font-bold">
-					{{ store.getCurrent!.content.trim().split("\n").length }}
-				</span>
-
-				lines
-			</p>
+			<PageEditorItem
+				label="creation"
+				icon="i-mdi-clock-check-outline"
+				:value="store.getCurrent!.createdAt"
+			/>
+			<PageEditorItem
+				label="words"
+				icon="i-mdi-format-line-height"
+				:value="store.getCurrent!.content.trim().split(' ').length.toString()"
+			/>
+			<PageEditorItem
+				label="lines"
+				icon="i-mdi-format-line-weight"
+				:value="store.getCurrent!.content.trim().split('\n').length.toString()"
+			/>
 		</div>
 		<textarea
 			:class="inputStyles"
