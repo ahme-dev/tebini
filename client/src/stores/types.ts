@@ -2,7 +2,7 @@ export interface Page {
 	id: string;
 	title: string;
 	content: string;
-	parent: string;
+	book: string;
 	inTrash: boolean;
 	createdAt: string;
 }

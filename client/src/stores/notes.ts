@@ -4,7 +4,9 @@ import type { Page } from "./types";
 import { findAnother } from "./utils";
 
 export const useNotesStore = defineStore("notes", () => {
-	const blank = {
+	const blank: Page = {
+		book: "blank",
+		inTrash: false,
 		id: "blank",
 		title: "",
 		content: "",
@@ -16,7 +18,7 @@ export const useNotesStore = defineStore("notes", () => {
 			id: "abcdef",
 			title: "VueJS",
 			content: "",
-			parent: "Code",
+			book: "Code",
 			inTrash: false,
 			createdAt: "2023/4/2",
 		},
@@ -24,7 +26,7 @@ export const useNotesStore = defineStore("notes", () => {
 			id: "adin",
 			title: "React",
 			content: "",
-			parent: "Code",
+			book: "Code",
 			inTrash: false,
 			createdAt: "2023/4/2",
 		},
