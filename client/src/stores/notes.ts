@@ -1,8 +1,17 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import type { Page } from "./types";
+import { findAnother } from "./utils";
 
 export const useNotesStore = defineStore("notes", () => {
-	const pages = ref([
+	const blank = {
+		id: "blank",
+		title: "",
+		content: "",
+		createdAt: "0/0/0",
+	};
+
+	const pages = ref<Page[]>([
 		{
 			id: "abcdef",
 			title: "VueJS",
@@ -23,7 +32,11 @@ export const useNotesStore = defineStore("notes", () => {
 
 	const current = ref("abcdef");
 
-	const getCurrent = computed(() => pages.value.find((p) => p.id === current.value));
+	const getCurrent = computed(() => {
+		const page = pages.value.find((p) => p.id === current.value);
+		if (!page) return blank;
+		return page;
+	});
 
 	const setCurrent = (pageID: string) => {
 		current.value = pageID;
@@ -37,21 +50,33 @@ export const useNotesStore = defineStore("notes", () => {
 	};
 
 	const trashPage = (pageID: string) => {
-		const index = pages.value.findIndex((p) => p.id === pageID);
+		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
-		pages.value[index].inTrash = true;
+		// change current to another one
+		const nearestPageID = findAnother(pages.value, current.value);
+
+		// if no other page was found do not remove page
+		if (nearestPageID === null) return;
+
+		// othewise set current to nearest
+		current.value = nearestPageID;
+
+		// and add trash flag to page
+		pages.value[pageIndex].inTrash = true;
 	};
 
 	const restorePage = (pageID: string) => {
-		const index = pages.value.findIndex((p) => p.id === pageID);
+		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
-		pages.value[index].inTrash = false;
+		// remove trash flag to page
+		pages.value[pageIndex].inTrash = false;
 	};
 
 	const deletePage = (pageID: string) => {
-		const index = pages.value.findIndex((p) => p.id === pageID);
+		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
-		pages.value.splice(index, 1);
+		// remove page from list
+		pages.value.splice(pageIndex, 1);
 	};
 
 	return {

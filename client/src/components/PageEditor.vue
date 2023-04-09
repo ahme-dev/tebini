@@ -24,13 +24,13 @@ const inputStyles =
 			</p>
 			<p class="bg-amber-3 text-neutral-9 px-1">
 				<span class="font-bold">
-					{{ store.getCurrent?.content.trim().split(" ").length }}
+					{{ store.getCurrent!.content.trim().split(" ").length }}
 				</span>
 				words
 			</p>
 			<p class="bg-amber-3 text-neutral-9 px-1">
 				<span class="font-bold">
-					{{ store.getCurrent?.content.trim().split("\n").length }}
+					{{ store.getCurrent!.content.trim().split("\n").length }}
 				</span>
 
 				lines
