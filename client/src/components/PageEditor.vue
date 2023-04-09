@@ -17,17 +17,29 @@ const inputStyles =
 			placeholder="title"
 		/>
 		<div class="flex flex-row gap-2 text-sm">
-			<p class="bg-amber-3 text-neutral-9 px-2">
-				words: {{ store.getCurrent?.content.trim().split(" ").length }}
+			<p class="bg-amber-3 text-neutral-9 px-1">
+				<span class="font-bold">
+					{{ store.getCurrent?.createdAt }}
+				</span>
 			</p>
-			<p class="bg-amber-3 text-neutral-9 px-2">
-				lines: {{ store.getCurrent?.content.trim().split("\n").length }}
+			<p class="bg-amber-3 text-neutral-9 px-1">
+				<span class="font-bold">
+					{{ store.getCurrent?.content.trim().split(" ").length }}
+				</span>
+				words
+			</p>
+			<p class="bg-amber-3 text-neutral-9 px-1">
+				<span class="font-bold">
+					{{ store.getCurrent?.content.trim().split("\n").length }}
+				</span>
+
+				lines
 			</p>
 		</div>
 		<textarea
 			:class="inputStyles"
 			v-model="store.getCurrent!.content"
-			class="grow"
+			class="grow resize-none"
 			placeholder="content"
 		/>
 	</div>

@@ -7,7 +7,9 @@ const store = useNotesStore();
 </script>
 
 <template>
-	<div class="min-h-screen bg-dark-9 text-neutral-1 flex flex-col-reverse p-4 md:(flex-row p-8)">
+	<div
+		class="min-h-screen bg-dark-9 text-neutral-1 flex flex-col-reverse p-4 md:(flex-row p-8) gap-4"
+	>
 		<!-- left section -->
 		<div class="grow flex flex-col">
 			<PageEditor></PageEditor>

@@ -9,6 +9,7 @@ export const useNotesStore = defineStore("notes", () => {
 			content: "",
 			parent: "Code",
 			inTrash: false,
+			createdAt: "2023/4/2",
 		},
 		{
 			id: "adin",
@@ -16,6 +17,7 @@ export const useNotesStore = defineStore("notes", () => {
 			content: "",
 			parent: "Code",
 			inTrash: false,
+			createdAt: "2023/4/2",
 		},
 	]);
 
