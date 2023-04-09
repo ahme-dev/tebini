@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import type { Page } from "./types";
-import { findAnother } from "./utils";
+import { findNearest } from "./utils";
 
 export const useNotesStore = defineStore("notes", () => {
 	const blank: Page = {
@@ -55,7 +55,7 @@ export const useNotesStore = defineStore("notes", () => {
 		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
 		// change current to another one
-		const nearestPageID = findAnother(pages.value, current.value);
+		const nearestPageID = findNearest(pages.value, pageID);
 
 		// if no other page was found do not remove page
 		if (nearestPageID === null) return;
