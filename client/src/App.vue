@@ -3,7 +3,6 @@ import PageEditorVue from "./components/PageEditor.vue";
 import { useNotesStore } from "./stores/notes";
 
 const store = useNotesStore();
-("bg-transparent py-2 border-l-2 border-l-transparent focus:(outline-none ring-none px-4 border-l-amber-3) transition-border transition-padding");
 </script>
 
 <template>
