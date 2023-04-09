@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import PageEditorVue from "./components/PageEditor.vue";
+import PageEditor from "./components/PageEditor.vue";
+import PageList from "./components/PageList.vue";
 import { useNotesStore } from "./stores/notes";
 
 const store = useNotesStore();
@@ -9,30 +10,13 @@ const store = useNotesStore();
 	<div class="min-h-screen bg-zinc-9 text-neutral-1 flex flex-col-reverse p-4 md:(flex-row p-8)">
 		<!-- left section -->
 		<div class="grow flex flex-col">
-			<PageEditorVue></PageEditorVue>
+			<PageEditor></PageEditor>
 		</div>
 		<!-- left section end -->
 
 		<!-- right section -->
 		<div>
-			<!-- explorer -->
-			<div class="flex flex-col gap-2 text-gray-3">
-				<p>Current: {{ store.current }}</p>
-				<div
-					v-for="page in store.pages"
-					:key="page.id"
-					class="bg-blue-9 cursor-pointer p-2 rounded-4"
-					:class="[page.id === store.current ? 'border-red-5' : 'border-transparent', 'border-2']"
-					@click="() => store.setCurrent(page.id)"
-				>
-					<h1>{{ page.title }}</h1>
-					<p>{{ page.parent }}</p>
-					<button class="border" @click="store.trashPage(page.id)" v-if="!page.inTrash">
-						Trash it
-					</button>
-					<button class="border" @click="store.restorePage(page.id)" v-else>Restore</button>
-				</div>
-			</div>
+			<PageList></PageList>
 
 			<!-- icons -->
 			<div></div>
