@@ -8,7 +8,7 @@ const inputStyles =
 </script>
 
 <template>
-	<div class="grow flex flex-col">
+	<div class="grow flex flex-col gap-2">
 		<input
 			:class="inputStyles"
 			v-model="store.getCurrent!.title"
@@ -16,6 +16,19 @@ const inputStyles =
 			type="text"
 			placeholder="title"
 		/>
-		<textarea :class="inputStyles" class="grow" placeholder="content" />
+		<div class="flex flex-row gap-2 text-sm">
+			<p class="bg-amber-3 text-neutral-9 px-2">
+				words: {{ store.getCurrent?.content.trim().split(" ").length }}
+			</p>
+			<p class="bg-amber-3 text-neutral-9 px-2">
+				lines: {{ store.getCurrent?.content.trim().split("\n").length }}
+			</p>
+		</div>
+		<textarea
+			:class="inputStyles"
+			v-model="store.getCurrent!.content"
+			class="grow"
+			placeholder="content"
+		/>
 	</div>
 </template>
