@@ -13,10 +13,12 @@ const inputStyles =
 		<input
 			:class="inputStyles"
 			v-model="store.getCurrent!.title"
-			class="font-bold text-xl"
+			class="font-bold text-xl caret-amber-3 selection:bg-amber-3/20"
 			type="text"
 			placeholder="title"
 		/>
+
+		<!-- status items -->
 		<div class="flex flex-row gap-2 text-sm">
 			<PageEditorItem
 				label="creation"
@@ -34,10 +36,12 @@ const inputStyles =
 				:value="store.getCurrent!.content.trim().split('\n').length.toString()"
 			/>
 		</div>
+		<!-- status items end -->
+
 		<textarea
 			:class="inputStyles"
 			v-model="store.getCurrent!.content"
-			class="grow resize-none"
+			class="grow resize-none caret-amber-3 selection:bg-amber-3/20"
 			placeholder="content"
 		/>
 	</div>
