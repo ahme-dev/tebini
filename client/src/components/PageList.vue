@@ -36,14 +36,14 @@ const books = computed(() => {
 </script>
 
 <template>
-	<div class="flex flex-col font-bold gap-2 text-sm">
+	<div class="flex flex-col gap-2 text-sm">
 		<!-- pages title -->
-		<p class="text-md">Pages</p>
+		<p class="text-base font-bold">Pages</p>
 
 		<div>
 			<div v-for="book in books" :key="book[0].book" class="flex flex-row">
 				<div
-					class="cursor-pointer py-1 flex flex-row gap-1 items-center justify-center transition-all [writing-mode:vertical-lr]"
+					class="cursor-pointer px-1 py-2 flex flex-row gap-1 items-center justify-center transition-all [writing-mode:vertical-lr]"
 					:class="[store.getCurrent!.book === book[0].book? 'bg-amber-3 text-neutral-9': '']"
 				>
 					<div class="i-mdi-folder rotate-90"></div>
