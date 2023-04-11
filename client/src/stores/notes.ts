@@ -3,108 +3,112 @@ import { defineStore } from "pinia";
 import type { Page } from "./types";
 import { findNearest } from "./utils";
 
-export const useNotesStore = defineStore("notes", () => {
-	const blank: Page = {
-		book: "blank",
-		inTrash: false,
-		id: "blank",
-		title: "",
-		content: "",
-		createdAt: "0/0/0",
-	};
-
-	const pages = ref<Page[]>([
-		{
-			id: "abcdef",
-			title: "VueJS",
-			content: "",
-			book: "Code",
+export const useNotesStore = defineStore(
+	"notes",
+	() => {
+		const blank: Page = {
+			book: "blank",
 			inTrash: false,
-			createdAt: "2023/4/2",
-		},
-		{
-			id: "adin",
-			title: "React",
+			id: "blank",
+			title: "",
 			content: "",
-			book: "Code",
-			inTrash: false,
-			createdAt: "2023/4/2",
-		},
-	]);
-
-	const current = ref("abcdef");
-
-	const getCurrent = computed(() => {
-		const page = pages.value.find((p) => p.id === current.value);
-		if (!page) return blank;
-		return page;
-	});
-
-	const setCurrent = (pageID: string) => {
-		current.value = pageID;
-	};
-
-	// function that adds a page to a book
-	// it also creates a new book with name if it does not exist
-	const addPage = (bookID: string) => {
-		const newPage: Page = {
-			book: bookID,
-			inTrash: false,
-			id: new Date().toLocaleString(),
-			title: "New Page",
-			content: "",
-			createdAt: "2023/4/2",
+			createdAt: "0/0/0",
 		};
 
-		pages.value.push(newPage);
-	};
+		const pages = ref<Page[]>([
+			{
+				id: "abcdef",
+				title: "VueJS",
+				content: "",
+				book: "Code",
+				inTrash: false,
+				createdAt: "2023/4/2",
+			},
+			{
+				id: "adin",
+				title: "React",
+				content: "",
+				book: "Code",
+				inTrash: false,
+				createdAt: "2023/4/2",
+			},
+		]);
 
-	const changeCurrent = (title: string, content: string) => {
-		const index = pages.value.findIndex((p) => p.id === current.value);
+		const current = ref("abcdef");
 
-		if (title) pages.value[index].title = title;
-		if (content) pages.value[index].content = content;
-	};
+		const getCurrent = computed(() => {
+			const page = pages.value.find((p) => p.id === current.value);
+			if (!page) return blank;
+			return page;
+		});
 
-	const trashPage = (pageID: string) => {
-		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
+		const setCurrent = (pageID: string) => {
+			current.value = pageID;
+		};
 
-		// change current to another one
-		const nearestPageID = findNearest(pages.value, pageID);
+		// function that adds a page to a book
+		// it also creates a new book with name if it does not exist
+		const addPage = (bookID: string) => {
+			const newPage: Page = {
+				book: bookID,
+				inTrash: false,
+				id: new Date().toLocaleString(),
+				title: "New Page",
+				content: "",
+				createdAt: "2023/4/2",
+			};
 
-		// if no other page was found do not remove page
-		if (nearestPageID === null) return;
+			pages.value.push(newPage);
+		};
 
-		// othewise set current to nearest
-		current.value = nearestPageID;
+		const changeCurrent = (title: string, content: string) => {
+			const index = pages.value.findIndex((p) => p.id === current.value);
 
-		// and add trash flag to page
-		pages.value[pageIndex].inTrash = true;
-	};
+			if (title) pages.value[index].title = title;
+			if (content) pages.value[index].content = content;
+		};
 
-	const restorePage = (pageID: string) => {
-		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
+		const trashPage = (pageID: string) => {
+			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
-		// remove trash flag to page
-		pages.value[pageIndex].inTrash = false;
-	};
+			// change current to another one
+			const nearestPageID = findNearest(pages.value, pageID);
 
-	const deletePage = (pageID: string) => {
-		const pageIndex = pages.value.findIndex((p) => p.id === pageID);
+			// if no other page was found do not remove page
+			if (nearestPageID === null) return;
 
-		// remove page from list
-		pages.value.splice(pageIndex, 1);
-	};
+			// othewise set current to nearest
+			current.value = nearestPageID;
 
-	return {
-		pages,
-		current,
-		getCurrent,
-		setCurrent,
-		changeCurrent,
-		addPage,
-		trashPage,
-		restorePage,
-		deletePage,
-	};
-});
+			// and add trash flag to page
+			pages.value[pageIndex].inTrash = true;
+		};
+
+		const restorePage = (pageID: string) => {
+			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
+
+			// remove trash flag to page
+			pages.value[pageIndex].inTrash = false;
+		};
+
+		const deletePage = (pageID: string) => {
+			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
+
+			// remove page from list
+			pages.value.splice(pageIndex, 1);
+		};
+
+		return {
+			pages,
+			current,
+			getCurrent,
+			setCurrent,
+			changeCurrent,
+			addPage,
+			trashPage,
+			restorePage,
+			deletePage,
+		};
+	},
+	{ persist: true },
+);
