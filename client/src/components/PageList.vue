@@ -4,6 +4,7 @@ import { useNotesStore } from "../stores/notes";
 import { computed } from "@vue/reactivity";
 import type { Page } from "../stores/types";
 import PageListItem from "./PageListItem.vue";
+import PageListGroup from "./PageListGroup.vue";
 
 const showTrash = ref(false);
 
@@ -42,25 +43,15 @@ const books = computed(() => {
 
 		<div>
 			<div v-for="book in books" :key="book[0].book" class="flex flex-row">
-				<div
-					class="px-1 py-2 flex flex-row gap-2 items-center justify-between transition-all [writing-mode:vertical-lr] group"
-					:class="[store.getCurrent!.book === book[0].book? 'bg-amber-3 text-neutral-9': '']"
-				>
-					<div class="gap-1 flex flex-row items-center">
-						<div
-							@click="() => store.addPage(book[0].book)"
-							class="i-mdi-folder rotate-90 transiton-all"
-						/>
-						<p>
-							{{ book[0].book }}
-						</p>
-					</div>
-
-					<div
-						@click="() => store.addPage(book[0].book)"
-						class="rotate-90 opacity-0 group-hover:(opacity-100) i-mdi-plus transition-all cursor-pointer"
-					/>
-				</div>
+				<!-- pages book -->
+				<PageListGroup
+					:bookTitle="book[0].book"
+					:handleIconClick="(evt:Event) => {
+						evt.stopPropagation();
+						store.addPage(book[0].book)
+					}"
+					:isSelected="store.getCurrent!.book === book[0].book"
+				/>
 
 				<!-- pages -->
 				<div class="flex flex-col">
