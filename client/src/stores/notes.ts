@@ -44,7 +44,8 @@ export const useNotesStore = defineStore("notes", () => {
 		current.value = pageID;
 	};
 
-	// function that adds a page with a specific bookID
+	// function that adds a page to a book
+	// it also creates a new book with name if it does not exist
 	const addPage = (bookID: string) => {
 		const newPage: Page = {
 			book: bookID,

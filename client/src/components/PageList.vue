@@ -7,6 +7,8 @@ import PageListItem from "./PageListItem.vue";
 import PageListGroup from "./PageListGroup.vue";
 
 const showTrash = ref(false);
+const showBookAdd = ref(false);
+const bookTitle = ref("");
 
 const store = useNotesStore();
 
@@ -37,10 +39,48 @@ const books = computed(() => {
 </script>
 
 <template>
-	<div class="flex flex-col gap-2 text-sm">
+	<div class="flex flex-col gap-2 text-sm md:(w-[15vw])">
 		<!-- pages title -->
-		<p class="text-base font-bold">Pages</p>
+		<div class="flex flex-row gap-2 justify-between items-center">
+			<p class="text-base font-bold">Pages</p>
+			<div
+				class="cursor-pointer transition-all"
+				:class="[showBookAdd ? 'i-mdi-chevron-up' : 'i-mdi-chevron-down']"
+				@click="() => (showBookAdd = !showBookAdd)"
+			></div>
+		</div>
 
+		<!-- book addition bar -->
+		<div
+			v-if="showBookAdd"
+			class="flex flex-row items-center justify-between py-1 px-2 gap-1 focus-within:(bg-amber-3 text-neutral-9) transition-all group/bookadd"
+		>
+			<input
+				v-model="bookTitle"
+				class="w-22 bg-transparent focus:(outline-none) transition-all group-focus-within/bookadd:(placeholder:text-neutral-7)"
+				type="text"
+				placeholder="New book title"
+				@keyup="
+					(evt) => {
+						if (evt.key !== 'Enter') return;
+						store.addPage(bookTitle);
+						showBookAdd = false;
+					}
+				"
+			/>
+			<div
+				class="i-mdi-plus-circle cursor-pointer"
+				@click="
+					() => {
+						showBookAdd = false;
+						store.addPage(bookTitle);
+					}
+				"
+			></div>
+		</div>
+		<!-- book addition bar end -->
+
+		<!-- the list -->
 		<div>
 			<div v-for="book in books" :key="book[0].book" class="flex flex-row">
 				<!-- pages book -->
@@ -54,7 +94,7 @@ const books = computed(() => {
 				/>
 
 				<!-- pages -->
-				<div class="flex flex-col">
+				<div class="grow flex flex-col">
 					<PageListItem
 						v-for="page in book"
 						:key="page.id"
@@ -70,6 +110,7 @@ const books = computed(() => {
 				<!-- pages end -->
 			</div>
 		</div>
+		<!-- the list end -->
 
 		<!-- trash switch -->
 		<div
