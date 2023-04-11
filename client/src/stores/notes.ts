@@ -44,6 +44,20 @@ export const useNotesStore = defineStore("notes", () => {
 		current.value = pageID;
 	};
 
+	// function that adds a page with a specific bookID
+	const addPage = (bookID: string) => {
+		const newPage: Page = {
+			book: bookID,
+			inTrash: false,
+			id: new Date().toLocaleString(),
+			title: "New Page",
+			content: "",
+			createdAt: "2023/4/2",
+		};
+
+		pages.value.push(newPage);
+	};
+
 	const changeCurrent = (title: string, content: string) => {
 		const index = pages.value.findIndex((p) => p.id === current.value);
 
@@ -87,6 +101,7 @@ export const useNotesStore = defineStore("notes", () => {
 		getCurrent,
 		setCurrent,
 		changeCurrent,
+		addPage,
 		trashPage,
 		restorePage,
 		deletePage,

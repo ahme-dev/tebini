@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "@vue/reactivity";
+
 const props = defineProps<{
 	icon: string;
 	handleIconClick: (evt: Event) => void;
@@ -6,6 +8,17 @@ const props = defineProps<{
 	title: string;
 	isSelected?: boolean;
 }>();
+
+const title = computed(() => {
+	const length = props.title.trim().length;
+	const titleTrimmed = props.title.trim();
+
+	if (length === 0) return "Untitled";
+
+	if (length > 7) return titleTrimmed.slice(0, 7) + "...";
+
+	return titleTrimmed;
+});
 </script>
 
 <template>
@@ -16,7 +29,9 @@ const props = defineProps<{
 	>
 		<div class="flex flex-row gap-1 items-center justify-center">
 			<div class="i-mdi-file"></div>
-			<h1>{{ props.title }}</h1>
+			<h1>
+				{{ title }}
+			</h1>
 		</div>
 
 		<div
