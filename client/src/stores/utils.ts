@@ -1,6 +1,6 @@
 import type { Page } from "./types";
 
-export const findNearest = (pageList: Page[], clicked: string): string | null => {
+export function findNearest(pageList: Page[], clicked: string): string | null {
 	// loop over all elements
 	for (let i = 0; i < pageList.length; i++) {
 		if (pageList[i].inTrash) continue;
@@ -26,4 +26,4 @@ export const findNearest = (pageList: Page[], clicked: string): string | null =>
 
 	// if nothing was found until the end return null
 	return null;
-};
+}

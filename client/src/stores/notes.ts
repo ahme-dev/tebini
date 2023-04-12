@@ -42,13 +42,13 @@ export const useNotesStore = defineStore(
 			return page;
 		});
 
-		const setCurrent = (pageID: string) => {
+		function setCurrent(pageID: string) {
 			current.value = pageID;
-		};
+		}
 
 		// function that adds a page to a book
 		// it also creates a new book with name if it does not exist
-		const addPage = (bookID: string) => {
+		function addPage(bookID: string) {
 			const newPage: Page = {
 				book: bookID,
 				inTrash: false,
@@ -59,16 +59,16 @@ export const useNotesStore = defineStore(
 			};
 
 			pages.value.push(newPage);
-		};
+		}
 
-		const changeCurrent = (title: string, content: string) => {
+		function changeCurrent(title: string, content: string) {
 			const index = pages.value.findIndex((p) => p.id === current.value);
 
 			if (title) pages.value[index].title = title;
 			if (content) pages.value[index].content = content;
-		};
+		}
 
-		const trashPage = (pageID: string) => {
+		function trashPage(pageID: string) {
 			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
 			// change current to another one
@@ -82,21 +82,21 @@ export const useNotesStore = defineStore(
 
 			// and add trash flag to page
 			pages.value[pageIndex].inTrash = true;
-		};
+		}
 
-		const restorePage = (pageID: string) => {
+		function restorePage(pageID: string) {
 			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
 			// remove trash flag to page
 			pages.value[pageIndex].inTrash = false;
-		};
+		}
 
-		const deletePage = (pageID: string) => {
+		function deletePage(pageID: string) {
 			const pageIndex = pages.value.findIndex((p) => p.id === pageID);
 
 			// remove page from list
 			pages.value.splice(pageIndex, 1);
-		};
+		}
 
 		return {
 			pages,
